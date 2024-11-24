@@ -2,10 +2,10 @@ package mirscript.lang.functional;
 
 import java.util.function.Function;
 
-public class FunctionGenerator<T> extends Generator<Function<T, T>, T> {
-	Generator<?, T> source;
+public class FunctionGenerator<T, U> extends Generator<Function<U, T>, T> {
+	Generator<?, U> source;
 	
-	public FunctionGenerator(Function<T, T> base, Generator<?, T> source) {
+	public FunctionGenerator(Function<U, T> base, Generator<?, U> source) {
 		super(base);
 		
 		this.source = source;

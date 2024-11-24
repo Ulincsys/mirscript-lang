@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class Generators {
 	public static <T> Generator<Supplier<T>, T> of(Supplier<T> s) {
@@ -25,6 +26,14 @@ public class Generators {
 				return base.apply(u);
 			}
 		};
+	}
+	
+	public static <T> Generator<Stream<T>, T> of(Stream<T> s) {
+		return new StreamGenerator<T>(s);
+	}
+	
+	public static <T, U> Generator<?, U> of(Function<T, U> applier, Generator<?, T> gen) {
+		return new FunctionGenerator<U, T>(applier, gen);
 	}
 	
 	@SafeVarargs
